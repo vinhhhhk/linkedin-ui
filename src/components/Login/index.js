@@ -1,10 +1,11 @@
-import styles from './Login.module.scss'
-import clsx from 'clsx'
+import styles from './Login.module.scss';
+import clsx from 'clsx';
+import { signInAPI } from '../../actions';
 
 import { connect, Connect } from 'react-redux';
 
 
-function Login() {
+function Login({props}) {
     return ( 
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.navbar)}>
@@ -22,7 +23,7 @@ function Login() {
                     <img src='/images/login-hero.svg' alt='' />
                 </div>
                 <div className={clsx(styles.gg_form)}>
-                    <button>
+                    <button onClick={() => props.signIn()}>
                         <img src="/images/google.svg" alt="" />
                         Sign in with Google
                     </button>
@@ -33,11 +34,12 @@ function Login() {
 }
 
 const mapStateToProps=(state) =>{
-    return {}
+    return {};
 }
 
-const mapDispatchToProps=(dispatch) => {
-    return {}
-}
+const mapDispatchToProps=(dispatch) => ({
+    signIn: () => dispatch(signInAPI()),
+});
+
 
 export default connect(mapStateToProps,mapDispatchToProps) (Login);
