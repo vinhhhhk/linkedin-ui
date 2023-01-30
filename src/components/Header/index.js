@@ -1,7 +1,14 @@
 import clsx from "clsx";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
 import styles from "./Header.module.scss";
+import {auth} from '../../firebase/config'
+import { signOut } from "firebase/auth";
+import MenuItem from "../../Item/MenuItem";
 
 function Header({props}) {
+
+    const data= useContext(AuthContext);
     return (
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.navbar)}>
@@ -19,56 +26,23 @@ function Header({props}) {
                     </div>
                 </div>
                 <nav className={clsx(styles.nav_menu)}>
-                    <ul className={clsx(styles.menu_list)}>
-                        <li className={clsx(styles.menu_item,styles.active)}>
-                            <a>
-                                <img src='/images/nav-home.svg'></img>
-                                <span>Home</span>
-                            </a>
-                        </li>
-                        <li className={clsx(styles.menu_item)}>
-                            <a>
-                                <img src="/images/nav-network.svg" alt="" />
-                                <span>My Network</span>
-                            </a>
-                        </li>
-                        <li className={clsx(styles.menu_item)}>
-                            <a>
-                                <img src="/images/nav-jobs.svg" alt="" />
-                                <span>Jobs</span>
-                            </a>
-                        </li>
-                        <li className={clsx(styles.menu_item)}>
-                            <a>
-                                <img src="/images/nav-messaging.svg" alt="" />
-                                <span>Messaging</span>
-                            </a>
-                        </li>
-                        <li className={clsx(styles.menu_item)}>
-                            <a>
-                                <img src="/images/nav-notifications.svg" alt="" />
-                                <span>Notifications</span>
-                            </a>
-                        </li>
-                        <li className={clsx(styles.user, styles.menu_item)}>
-                            <a>
-                                <img src="/images/user.svg" alt="" />
-                                <span>Me
-                                <img  src="/images/down-icon.svg" alt="" />
-                                </span>
-                            </a>
-                            <div className={clsx(styles.sign_out)}>Sign out</div>
-                        </li>
+                    <div className={clsx(styles.menu_list)}>
+                            <MenuItem menu href="/home" src='/images/nav-home.svg'> Home</MenuItem>
+                      
+                            <MenuItem menu to={"/mynetwork"} src="/images/nav-network.svg"> My Network</MenuItem>
+                          
+                            <MenuItem menu to={"/jobs"} src="/images/nav-jobs.svg"> Jobs</MenuItem>
 
+                            <MenuItem menu to={"/messaging"} src="/images/nav-messaging.svg" >Messaging</MenuItem>
 
-                        <li className={clsx(styles.menu_item)}>
-                            <a>
-                                <img src="/images/nav-work.svg" alt="" />
-                                <span>Work<img  src="/images/down-icon.svg" alt="" />
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
+                            <MenuItem menu to={"/notifications"} src="/images/nav-notifications.svg" >Notifications</MenuItem>
+
+                           <div>
+                                <MenuItem user href="/home" src={data.photoURL || '/images/user.svg'} iconMore={"/images/down-icon.svg"}>Me</MenuItem>
+                           </div>
+
+                            <MenuItem menu href="/home" src="/images/nav-work.svg" iconMore={"/images/down-icon.svg"}>Work</MenuItem>
+                    </div>
                 </nav>
             </div>
         </div> 

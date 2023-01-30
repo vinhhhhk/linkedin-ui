@@ -1,11 +1,17 @@
-import styles from './Login.module.scss';
 import clsx from 'clsx';
-import { signInAPI } from '../../actions';
 
-import { connect, Connect } from 'react-redux';
-
+import styles from './Login.module.scss';
+import {  signInWithPopup,} from "firebase/auth";
+import {auth, provider} from '../../firebase/config'
 
 function Login({props}) {
+    
+    const handleLogin= async() =>{
+       const data= await signInWithPopup(auth, provider);
+       console.log(data);
+    };
+    
+
     return ( 
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.navbar)}>
@@ -23,7 +29,7 @@ function Login({props}) {
                     <img src='/images/login-hero.svg' alt='' />
                 </div>
                 <div className={clsx(styles.gg_form)}>
-                    <button onClick={() => props.signIn()}>
+                    <button onClick={handleLogin}>
                         <img src="/images/google.svg" alt="" />
                         Sign in with Google
                     </button>
@@ -33,13 +39,6 @@ function Login({props}) {
     );
 }
 
-const mapStateToProps=(state) =>{
-    return {};
-}
-
-const mapDispatchToProps=(dispatch) => ({
-    signIn: () => dispatch(signInAPI()),
-});
 
 
-export default connect(mapStateToProps,mapDispatchToProps) (Login);
+export default (Login);
