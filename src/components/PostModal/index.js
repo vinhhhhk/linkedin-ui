@@ -15,12 +15,11 @@ function PostModal(props) {
         props.handleClick(e);
     }
 
-    console.log(props.showModal)
     return (
          <>
              { props.showModal === 'open' &&
                 (<div className={clsx(styles.wrapper)}>
-                <div className={clsx(styles.content)}>
+                    <div className={clsx(styles.content)}>
                     <header className={clsx(styles.header)}> 
                         <h2>Create a post</h2>
                         <button onClick={(event) => reset(event)} >
@@ -32,8 +31,6 @@ function PostModal(props) {
                             <img src={data.photoURL} alt='' />
                             <span>{data.displayName}</span>
                         </div>
-    
-                        
                         <div className={clsx(styles.input_box)}>
                             <textarea  
                                 value={inputValue}
@@ -42,7 +39,7 @@ function PostModal(props) {
                                 onChange={e => setInputValue(e.target.value)}
                             />
                         </div>
-                     
+
                         <div className={clsx(styles.action)}>
                            <div className={clsx(styles.assets)}>
                                 <button>

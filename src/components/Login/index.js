@@ -1,8 +1,8 @@
 import clsx from 'clsx';
+import {  signInWithPopup,} from "firebase/auth";
 
 import styles from './Login.module.scss';
-import {  signInWithPopup,} from "firebase/auth";
-import {auth, provider} from '../../firebase/config'
+import {auth, provider} from '../../firebase/config';
 
 function Login({props}) {
     

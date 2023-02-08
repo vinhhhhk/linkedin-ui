@@ -1,0 +1,11 @@
+.wrapper {
+    position: absolute;
+    width: 264px;
+    background-color: white;
+    max-height: calc(100vh - 64px);
+    right:223px;
+    top: calc(100% + 8px);
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 15%);
+    transition: visibility 0s linear 167ms,opacity 167ms cubic-bezier(.4,0,1,1) 0s,z-index 0s linear 167ms;
+}

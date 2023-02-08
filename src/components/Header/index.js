@@ -1,19 +1,44 @@
 import clsx from "clsx";
-import { useContext } from "react";
+import { useContext ,useEffect,useRef,useState} from "react";
+
 import { AuthContext } from "../../Context/AuthProvider";
 import styles from "./Header.module.scss";
-import {auth} from '../../firebase/config'
-import { signOut } from "firebase/auth";
 import MenuItem from "../../Item/MenuItem";
+import Menu from "../Menu";
+
+
+
 
 function Header({props}) {
 
+    const [showMenu,setShowMenu]=useState(false)
+
     const data= useContext(AuthContext);
+
+    let menuRef= useRef();
+
+    let handleSetShowMenu=() => {
+        setShowMenu(!showMenu);
+    }
+    
+    useEffect(() => {
+        let handler = (e) => {
+            if (!menuRef.current.contains(e.target)) {
+                setShowMenu(false);
+            }       
+        }
+        document.addEventListener("mousedown", handler);
+
+        return () => {
+            document.removeEventListener("mousedown",handler);
+        }
+    })
+
     return (
-        <div className={clsx(styles.wrapper)}>
+        <div className={clsx(styles.wrapper)} >
             <div className={clsx(styles.navbar)}>
                 <span className={clsx(styles.logo)}>
-                    <a href="/home">
+                    <a href="/">
                         <img src='/images/home-logo.svg' alt=''></img>
                     </a>
                 </span>
@@ -25,8 +50,8 @@ function Header({props}) {
                         <img src="/images/search-icon.svg" alt="" />
                     </div>
                 </div>
-                <nav className={clsx(styles.nav_menu)}>
-                    <div className={clsx(styles.menu_list)}>
+                <nav className={clsx(styles.nav_menu)} >
+
                             <MenuItem menu href="/home" src='/images/nav-home.svg'> Home</MenuItem>
                       
                             <MenuItem menu to={"/mynetwork"} src="/images/nav-network.svg"> My Network</MenuItem>
@@ -37,12 +62,13 @@ function Header({props}) {
 
                             <MenuItem menu to={"/notifications"} src="/images/nav-notifications.svg" >Notifications</MenuItem>
 
-                           <div>
-                                <MenuItem user href="/home" src={data.photoURL || '/images/user.svg'} iconMore={"/images/down-icon.svg"}>Me</MenuItem>
-                           </div>
+                            <div ref={menuRef}>
+                                <MenuItem user href="/home" src={data.photoURL || '/images/user.svg'} iconMore={"/images/down-icon.svg"}  onClick={handleSetShowMenu}>Me</MenuItem>
+                                {showMenu ? <Menu   data={data}/> : null }
+                            </div>
 
                             <MenuItem menu href="/home" src="/images/nav-work.svg" iconMore={"/images/down-icon.svg"}>Work</MenuItem>
-                    </div>
+                    
                 </nav>
             </div>
         </div> 
