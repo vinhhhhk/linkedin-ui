@@ -1,6 +1,6 @@
 function Messagings() {
     return ( <div>
-        
+        Messagings
     </div> );
 }
 

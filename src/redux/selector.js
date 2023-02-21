@@ -1,0 +1,1 @@
+export const addPostSelector =(state) => state.addPost

@@ -12,9 +12,8 @@ function AuthProvider({children}) {
 
     useEffect(() =>{
        const unSubcribe= onAuthStateChanged(auth, (user) => {
-        console.log(user)
            if(user) {
-                const {displayName, email, uid, photoURL} =user;
+                const {displayName, email, uid, photoURL} = user;
                 setUser({displayName, email, uid, photoURL});
                 navigate('/home');
                 return;

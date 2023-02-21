@@ -1,0 +1,30 @@
+.wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding-bottom: 4px;
+        font-size: 14px;
+        padding: 0 16px;
+        border-radius: 3px;
+        padding-left: 8px;
+        padding-right: 8px;
+        
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            img {
+                margin: 0 10px 0 -2px;
+            }
+
+            span {
+                color:#70b5f9;
+            }
+        }
+        
+        &:hover {
+            background-color: #ebebeb;
+        }
+
+ }
