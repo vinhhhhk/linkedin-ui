@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ReactPlayer from "react-player";
 import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
@@ -8,43 +8,46 @@ import styles from "./PostModal.module.scss";
 import { AuthContext } from "../../Context/AuthProvider";
 import { addPost } from "../../redux/actions";
 import Button from "../Item/Button";
-import PostModalButton from "./PostModalButton";
+import PostModalButton from "./ButtonPostModal";
+import useModal from "./useModal";
 
 function PostModal(props) {
   const [inputValue, setInputValue] = useState("");
   const [shareImage, setShareImage] = useState(null);
   const [shareVideo, setShareVideo] = useState("");
   const [selection, setSelection] = useState("anyone");
-  //   const [valueButton, setValueButton] =useState('');
+  const [valueButton, setValueButton] =useState('');
+  const [file, setFile] = useState();
+  const {isShowing, toggle} = useModal();
 
-  const data = useContext(AuthContext);
   const dispatch = useDispatch();
 
+  const handleOpenModal =(e) =>{
+    toggle();
+    props.handleClick(e);
+  }
+
+
+  const sendData = (data) => {
+    setFile(data)
+  }
+  
   const handleChangeSelect = (e) => {
     setSelection(e.target.value);
   };
-  const handleChange = (e) => {
-    const image = e.target.files[0];
-    if (!image || image === undefined) {
-      alert(`there are no image+ ${typeof image}`);
-      return;
-    }
-    setShareImage(image);
-  };
-
+ 
+  // Dispatch data
   const handlePost = () => {
     dispatch(
       addPost({
         id: uuidv4(),
         description: inputValue,
-        src: shareImage ? URL.createObjectURL(shareImage) : "",
+        src: file,
         section: selection,
       })
     );
     setShareImage("");
     setInputValue("");
-    // reset()
-    // props.handleClick();
   };
 
   const reset = (e) => {
@@ -56,7 +59,7 @@ function PostModal(props) {
 
   return (
     <>
-      {props.showModal === "open" && (
+      {props.showModal && (
         <div className={clsx(styles.wrapper)}>
           <div className={clsx(styles.content)}>
             <header className={clsx(styles.header)}>
@@ -67,8 +70,8 @@ function PostModal(props) {
             </header>
             <div className={clsx(styles.share_box)}>
               <div className={clsx(styles.user_info)}>
-                <img src={data.photoURL} alt="" />
-                <span>{data.displayName}</span>
+                <img src='/images/user.svg' alt="" />
+                <span>kennen</span>
               </div>
               <div className={clsx(styles.input_box)}>
                 <textarea
@@ -78,8 +81,8 @@ function PostModal(props) {
                   onChange={(e) => setInputValue(e.target.value)}
                 />
                 <div className={clsx(styles.upload_image)}>
-                  {(shareImage && (
-                    <img src={URL.createObjectURL(shareImage)} />
+                  {(file && (
+                    <img src={file} />
                   )) ||
                     (shareVideo && (
                       <ReactPlayer width="100%" url={shareVideo} />
@@ -89,37 +92,12 @@ function PostModal(props) {
 
               <div className={clsx(styles.action)}>
                 <div className={clsx(styles.assets)}>
-                  <button>
-                    <input
-                      accept="image/gif , image/jpeg, image/png"
-                      name="image"
-                      type="file"
-                      style={{ display: "none" }}
-                      id="file"
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="file"> Click input file</label>
-                    <img src="/images/image-icon.svg" />
-                  </button>
-                  <button>
-                    <img src="/images/youtube-icon.svg" />
-                  </button>
-                  {/* <Button src="/images/image-icon.svg" value="image"/> */}
-                  {/* <button>
-                                    <img  src='/images/document-icon.svg'/>
-                                </button>
-                                <button>
-                                    <img  src='/images/job-icon.svg'/>
-                                </button>
-                                <button>
-                                    <img  src='/images/occation-icon.svg'/>
-                                </button>
-                                <button>
-                                    <img  src='/images/poll-icon.svg'/>
-                                </button> */}
-                  <button>
-                    <img src="/images/more-icon.svg" />
-                  </button>
+                  <Button  onClick={() => setValueButton('image')}  src="/images/image-icon.svg"/>
+                  <Button  onClick={() => setValueButton('video')}   src="/images/video-icon.svg"/>
+                  {/* <Button  onClick={() => setValueButton('job')}  src="/images/job-icon.svg"/>
+                  <Button  onClick={() => setValueButton('image')}   src="/images/occation-icon.svg"/>
+                  <Button  onClick={() => setValueButton('image')}   src="/images/poll-icon.svg"/> */}
+                  <Button  onClick={() => setValueButton('image')}   src="/images/more-icon.svg"/>  
                 </div>
                 <div className={clsx(styles.share_state)}>
                   <button>
@@ -137,9 +115,7 @@ function PostModal(props) {
                 </div>
                 <button
                   className={clsx(styles.post)}
-                  disabled={
-                    !inputValue && !shareImage && !shareVideo ? true : false
-                  }
+                  disabled={ !inputValue && !shareImage && !shareVideo ? true : false }
                   onClick={handlePost}
                 >
                   Post
@@ -149,7 +125,12 @@ function PostModal(props) {
           </div>
         </div>
       )}
-      {/* <PostModalButton  value={valueButton} /> */}
+       <PostModalButton 
+       value={valueButton} 
+       sendData={sendData} 
+       isShowing={isShowing}
+       hide={toggle}
+        />
     </>
   );
 }

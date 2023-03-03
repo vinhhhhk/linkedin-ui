@@ -1,11 +1,8 @@
 import clsx from "clsx";
 import styles from './Leftside.module.scss'
-import { useContext } from "react";
-import { AuthContext } from "../../../Context/AuthProvider";
 
 
 function Leftside({props}) {
-    const data= useContext(AuthContext);
     return (
         <div className={clsx(styles.wrapper)}>
         <div className={clsx(styles.container)}>
@@ -15,7 +12,7 @@ function Leftside({props}) {
                     <div className={clsx(styles.avatar)}>
                         <img src='/images/avatar.svg' alt='' />
                     </div>
-                    <div className={clsx(styles.label)}>Welcome, {data.displayName}</div>
+                    <div className={clsx(styles.label)}>Welcome, kennen</div>
                 </a>
                 <a><div className={clsx(styles.add)}>Add a photo</div></a>
             </div>

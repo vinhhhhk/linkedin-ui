@@ -1,0 +1,8 @@
+<svg role="none" aria-hidden="true" class="job-card-list__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" data-supported-dps="16x16" data-test-icon="linkedin-bug-color-small">
+<!---->    <svg display="var(--hue-web-svg-display-light)">
+      <!-- <image href="https://static.licdn.com/sc/h/2lte9rx50p160huhpjiynt3mn" x="0" y="0" width="16" height="16"></image> -->
+    </svg>
+    <svg display="var(--hue-web-svg-display-dark)">
+      <image href="https://static.licdn.com/sc/h/2lte9rx50p160huhpjiynt3mn" x="0" y="0" width="16" height="16"></image>
+    </svg>
+</svg>

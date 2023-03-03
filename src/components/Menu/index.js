@@ -6,16 +6,15 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebase/config";
 import styles from "./Menu.module.scss";
 import MenuItem from "../Item/MenuItem";
-import { AuthContext } from "../../Context/AuthProvider";
 
 function Menu({ ...props }) {
-  const data = useContext(AuthContext);
+
   return (
     <div className={clsx(styles.wrapper)}>
       <div className={clsx(styles.header)}>
         <div className={clsx(styles.info)}>
-          <img className={clsx(styles.avatar)} src={data.photoURL} alt="" />
-          <span className={clsx(styles.name)}>{data.displayName}</span>
+          <img className={clsx(styles.avatar)} src='' alt="" />
+          <span className={clsx(styles.name)}>kennen</span>
         </div>
         <Link to="/profile" className={clsx(styles.profile_btn)}>
           View profile

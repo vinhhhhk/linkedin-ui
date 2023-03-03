@@ -1,18 +1,18 @@
 import styles from "./Share.module.scss";
 import clsx from "clsx";
-import { AuthContext } from "../../Context/AuthProvider";
-import { useContext } from "react";
+
+
 
 function SharePost({ id, description, selection, src, ...props }) {
-  const data = useContext(AuthContext);
+
 
   return (
     <div className={clsx(styles.post_box)}>
       <div className={clsx(styles.account)}>
         <a>
-          <img src={data.photoURL} className={clsx(styles.avatar)} />
+          <img src='' className={clsx(styles.avatar)} />
           <div>
-            <span className={clsx(styles.name)}>{data.displayName}</span>
+            <span className={clsx(styles.name)}>kennen</span>
             <span className={clsx(styles.follower)}>55 follower</span>
             <span className={clsx(styles.time)}>22/3/2002</span>
           </div>

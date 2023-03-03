@@ -3,14 +3,16 @@ import { Fragment } from "react";
 
 import "./App.css";
 import { routes } from "./routes";
-import AuthProvider from "./Context/AuthProvider";
+// import AuthProvider from "./Context/AuthProvider";
 import DefaultLayout from "./components/layout/DefaultLayout";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <AuthProvider>
+        <Provider store={store}>
           <Routes>
             {routes.map((route, index) => {
               const Page = route.component;
@@ -33,7 +35,7 @@ function App() {
               );
             })}
           </Routes>
-        </AuthProvider>
+        </Provider>
       </div>
     </Router>
   );

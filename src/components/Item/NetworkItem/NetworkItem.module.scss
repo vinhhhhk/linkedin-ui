@@ -1,0 +1,19 @@
+.wrapper {
+
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    margin: 4px 0;
+    img{
+        color: #00000099;
+    }
+
+    span{
+        color: #00000099;
+        margin-left:16px ;
+    }
+}

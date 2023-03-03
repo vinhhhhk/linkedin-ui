@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" data-supported-dps="40x40" width="40" height="40" focusable="false">
-  <!-- <defs>
+  <defs>
     <linearGradient id="app-learning-@1-a" x1="7.18" y1="6.98" x2="13.8" y2="20.22" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#33aada"></stop>
       <stop offset="1" stop-color="#0091ca"></stop>
@@ -8,7 +8,7 @@
       <stop offset="0" stop-color="#665ed0"></stop>
       <stop offset="1" stop-color="#0073b1"></stop>
     </linearGradient>
-  </defs> -->
+  </defs>
   <path d="M20 30H8a1 1 0 01-1-1V11a1 1 0 011-1h12v20z" fill="url(#app-learning-@1-a)"></path>
   <path d="M20 10h12a1 1 0 011 1v18a1 1 0 01-1 1H20V10z" fill="url(#app-learning-@1-b)"></path>
   <path fill="#33aada" d="M9 19h8v2H9zM9 23h8v2H9zM9 15h8v2H9z"></path>

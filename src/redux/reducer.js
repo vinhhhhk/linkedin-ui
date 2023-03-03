@@ -1,10 +1,15 @@
+import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS,LOGIN_REQUEST,} from "./actions";
+
 const initialState = {
-  login: {
-    loading: false,
-    currentUser: null,
-    error: null,
-  },
-  addPost: [
+  login: 
+    {
+      loading: true,
+      user: null,
+      error: null,
+    }
+  ,
+
+  addPost:[
     {
       id: 1,
       description: "We can’t wait to host more exciting MICE events this year",
@@ -26,18 +31,56 @@ const initialState = {
   ],
 };
 
-const rootReducer = (state = initialState, action) => {
+// Log in
+
+export const authReducer = (state = initialState.login, action) => {
   console.log({ state, action });
+
+  switch (action.type) {
+    case LOGIN_REQUEST:
+      return { 
+         ...state,
+         
+    };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        login:[
+          {
+          ...state,
+          user: action.payload,}
+        ]
+      };
+
+    case LOGIN_FAILURE:
+      return {
+        error: action.payload,
+        user: null,
+      };
+    case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        };
+      
+    default:
+      return state;
+  }
+};
+
+// Add post
+ const rootReducer = (state = initialState.addPost, action) => {
+  // console.log({ state, action });
   switch (action.type) {
     case "post/news":
       return {
         ...state,
-        addPost: [...state.addPost, action.payload]
+        addPost: [action.payload,...state.addPost ],
       };
 
     default:
       return state;
   }
 };
-
 export default rootReducer;
+
+

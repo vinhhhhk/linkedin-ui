@@ -1,4 +1,5 @@
 .menu {
+
     border: none;
     align-items: center;
     background: transparent;
@@ -14,6 +15,7 @@
     min-width: 10px;
     position: relative;
     text-decoration: none;
+    cursor: pointer;
     .menu_list {
       display: flex;
       flex-direction: column;

@@ -1,17 +1,17 @@
 import clsx from 'clsx';
-import {  signInWithPopup,} from "firebase/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { loginWithGoogle } from '../../../redux/middleware';
+
 
 import styles from './Login.module.scss';
-import {auth, provider} from '../../../firebase/config';
 
-function Login({props}) {
-    
-    const handleLogin= async() =>{
-       const data= await signInWithPopup(auth, provider);
-       console.log(data);
-    };
-    
+function Login() {
+    const dispatch=useDispatch();
 
+    const handleLogin= () =>{
+        dispatch(loginWithGoogle())
+    }
+    
     return ( 
         <div className={clsx(styles.wrapper)}>
             <div className={clsx(styles.navbar)}>
@@ -41,4 +41,4 @@ function Login({props}) {
 
 
 
-export default (Login);
+export default Login;
